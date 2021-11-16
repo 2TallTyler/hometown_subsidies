@@ -135,7 +135,9 @@ function MainClass::Init()
 		// Copy loaded data from this._loaded_data to this.*
 		// or do whatever you like with the loaded data
 	} else {
-		// construct goals etc.
+		if (GSGameSettings.IsValid("difficulty.subsidy_duration")) {
+			GSGameSettings.SetValue("difficulty.subsidy_duration", 5000);
+		}
 	}
 
 	// Indicate that all data structures has been initialized/restored.
