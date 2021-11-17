@@ -1,1 +1,1 @@
-STR_WELCOME    :Hello {COMPANY}!{}{}You are playing a game with Minimal GS - a boilerplate for GS authors.
+STR_WELCOME    :Welcome home!{}{}Please build a company HQ to claim your hometown.{}{}Then keep an eye out for subsidies from nearby towns.
