@@ -13,7 +13,7 @@ from pathlib import Path
 # ----------------------------------
 
 # Game Script name
-gs_name = "HQ Subsidies"
+gs_name = "Hometown Subsidies"
 gs_pack_name = gs_name.replace(" ", "-")
 
 # Where to copy packaged GS to?

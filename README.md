@@ -1,2 +1,7 @@
-# HQ Subsidies
-An OpenTTD GameScript which creates passenger subsidies to your headquarters town. Designed to be used with the Reduced Passenger Payment NewGRF.
+# Hometown Subsidies
+1. Place your HQ in a town
+2. Get subsidy offers
+3. ????
+4. Profit!
+
+An OpenTTD GameScript which creates subsidies to the town where you build your headquarters.

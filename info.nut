@@ -22,14 +22,14 @@ require("version.nut");
 
 class FMainClass extends GSInfo {
 	function GetAuthor()		{ return "2TallTyler"; }
-	function GetName()			{ return "HQ Subsidies"; }
-	function GetDescription() 	{ return "Place your HQ in a town, and you'll be offered subsidies to connect to it."; }
+	function GetName()			{ return "Hometown Subsidies"; }
+	function GetDescription() 	{ return "Place your HQ in a town, get subsidy offers, profit."; }
 	function GetVersion()		{ return SELF_VERSION; }
 	function GetDate()			{ return "2021-11-16"; }
 	function CreateInstance()	{ return "MainClass"; }
-	function GetShortName()		{ return "HQSB"; } // Replace this with your own unique 4 letter string
+	function GetShortName()		{ return "TT01"; } // Replace this with your own unique 4 letter string
 	function GetAPIVersion()	{ return "1.3"; }
-	function GetURL()			{ return "https://github.com/2TallTyler/hq_subsidies"; }
+	function GetURL()			{ return "https://github.com/2TallTyler/hometown_subsidies"; }
 
 	function GetSettings() {
 		AddSetting({
