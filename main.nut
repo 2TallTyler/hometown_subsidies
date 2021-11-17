@@ -42,8 +42,8 @@ Story <- SuperLib.Story;
 
 /** Import other source code files **/
 require("version.nut"); // get SELF_VERSION
-//require("some_file.nut");
-//..
+require("economy.nut");
+require("company.nut");
 
 
 class MainClass extends GSController 
@@ -51,6 +51,8 @@ class MainClass extends GSController
 	_loaded_data = null;
 	_loaded_from_version = null;
 	_init_done = null;
+
+	economy = null;
 
 	/*
 	 * This method is called when your GS is constructed.
@@ -138,6 +140,8 @@ function MainClass::Init()
 		if (GSGameSettings.IsValid("difficulty.subsidy_duration")) {
 			GSGameSettings.SetValue("difficulty.subsidy_duration", 5000);
 		}
+
+		this.economy = Economy();
 	}
 
 	// Indicate that all data structures has been initialized/restored.
@@ -159,13 +163,22 @@ function MainClass::HandleEvents()
 			case GSEvent.ET_COMPANY_NEW: {
 				local company_event = GSEventCompanyNew.Convert(ev);
 				local company_id = company_event.GetCompanyID();
+				this.economy.AddCompany(company_id);
 
 				// Here you can welcome the new company
 				Story.ShowMessage(company_id, GSText(GSText.STR_WELCOME, company_id));
 				break;
 			}
 
-			// other events ...
+			case GSEvent.ET_COMPANY_MERGER: {
+				local companyEvent = GSEventCompanyMerger.Convert(ev);
+				this.economy.RemoveCompanyIfExists(companyEvent.GetOldCompanyID());
+			}
+
+			case GSEvent.ET_COMPANY_BANKRUPT: {
+				local companyEvent = GSEventCompanyBankrupt.Convert(ev);
+				this.economy.RemoveCompanyIfExists(companyEvent.GetCompanyID());
+			}
 		}
 	}
 }
@@ -175,6 +188,15 @@ function MainClass::HandleEvents()
  */
 function MainClass::EndOfMonth()
 {
+	foreach (company in this.economy.companies_list) {
+		if (company.HasHQ()) {
+			local company_name = GSCompany.GetName(company.id);
+			this.economy.CreateSubsidy(company.GetHometown());
+		} else {
+			local company_name = GSCompany.GetName(company.id);
+			GSLog.Info(company_name + " has no HQ yet.");
+		}
+	}
 }
 
 /*
